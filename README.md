@@ -11,3 +11,4 @@ won't be able to start the game unless all the players are ready. Only the maste
 
 The players are respawned into four different positions once the player loses all health points he lose the game.
  
+ This repo includes the PC build.
