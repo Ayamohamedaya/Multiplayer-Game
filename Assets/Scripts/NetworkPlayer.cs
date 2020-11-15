@@ -23,7 +23,7 @@ public class NetworkPlayer : MonoBehaviourPun, IPunObservable
     [SerializeField] TextMeshProUGUI playername;
     [SerializeField] GameObject target;
     int damage = 10;
-
+    bool isDead = false;
 
    
     // Start is called before the first frame updat
@@ -41,7 +41,7 @@ public class NetworkPlayer : MonoBehaviourPun, IPunObservable
     // Update is called once per frame
     void Update()
     {
-        if (photonView.IsMine)
+        if (photonView.IsMine &&isDead ==false)
         {
           
 
@@ -73,7 +73,9 @@ public class NetworkPlayer : MonoBehaviourPun, IPunObservable
 
             if (health == 0)
             {
+                isDead = true;
                 GamePlayUI.Instance.DisplayGameOver();
+
             }
         }
     }
