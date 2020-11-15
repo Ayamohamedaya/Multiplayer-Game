@@ -17,8 +17,8 @@ public class MainMenuUIManager : MonoBehaviour
     [SerializeField] GameObject Panel_connection;
     [SerializeField] GameObject Panel_lobby;
     [SerializeField] GameObject Panel_lobby_waitingForPlayers;
-    [SerializeField] TMP_InputField if_playerName;
-    [SerializeField] TMP_InputField if_roomName;
+    [SerializeField] TMP_InputField _playerName;
+    [SerializeField] TMP_InputField _roomName;
     [SerializeField] GameObject panel_ready;
     static MainMenuUIManager instance;
    public string playerName;
@@ -57,31 +57,30 @@ public class MainMenuUIManager : MonoBehaviour
 
     public void Connect()
     {
-        Debug.Log("connect");
         NetworkManager.Instance.Connect();
     }
 
     public void CreateRoom()
     {
-        if (string.IsNullOrEmpty(if_playerName.text))
+        if (string.IsNullOrEmpty(_playerName.text))
         {
             return;
         }
-        Photon.Pun.PhotonNetwork.NickName = if_playerName.text;
-        playerName = if_playerName.text;
+        Photon.Pun.PhotonNetwork.NickName = _playerName.text;
+        playerName = _playerName.text;
 
-        NetworkManager.Instance.CreateRoom(if_roomName.text);
+        NetworkManager.Instance.CreateRoom(_roomName.text);
     }
 
     public void JoinRoom()
     {
-        if (string.IsNullOrEmpty(if_playerName.text))
+        if (string.IsNullOrEmpty(_playerName.text))
         {
             return;
         }
-        Photon.Pun.PhotonNetwork.NickName = if_playerName.text;
-       playerName= if_playerName.text;
-        NetworkManager.Instance.JoinRoom(if_roomName.text);
+        Photon.Pun.PhotonNetwork.NickName = _playerName.text;
+       playerName= _playerName.text;
+        NetworkManager.Instance.JoinRoom(_roomName.text);
     }
 
     public void ClickReady()

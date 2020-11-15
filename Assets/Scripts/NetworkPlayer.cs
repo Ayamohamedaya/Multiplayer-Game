@@ -61,7 +61,7 @@ public class NetworkPlayer : MonoBehaviourPun, IPunObservable
             {
                 cannonPivot.transform.RotateAround(target.transform.position, Vector3.up, rotationSpeed * Time.deltaTime);
 
-                NetworkManager.Instance.Log("right arrow");
+
                 GetComponent<PhotonView>().RPC("Shoot", RpcTarget.All, 1);
             }
             else if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -92,26 +92,12 @@ public class NetworkPlayer : MonoBehaviourPun, IPunObservable
         if (x > 0)
         {
             //Shoot Right
-            if (!photonView.IsMine)
-            {
-                NetworkManager.Instance.Log("Non Local Client Shooting Right"); 
-            }
-            NetworkManager.Instance.Log("shoot right");
-
             shootBullet();
-
         }
         else if (x < 0)
         {
             //Shoot Left
-            if (!photonView.IsMine)
-            {
-                NetworkManager.Instance.Log("Non Local Client Shooting Left"); 
-            }
-            NetworkManager.Instance.Log("shoot left");
-
             shootBullet();
-
         }
 
     }
@@ -120,12 +106,11 @@ public class NetworkPlayer : MonoBehaviourPun, IPunObservable
     [PunRPC]
     private void shootBullet()
     {
-        NetworkManager.Instance.Log("instantiate");
 
         Rigidbody clone;
         clone = Instantiate(bulletPrefab, bulletPosition.position, bulletPosition.rotation);
         clone.velocity = bulletPosition.transform.forward * speed;
-        
+        Destroy(clone.gameObject,3);
     }
 
     [PunRPC ]

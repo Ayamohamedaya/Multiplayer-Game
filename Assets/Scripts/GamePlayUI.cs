@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GamePlayUI : MonoBehaviour
 {
     static GamePlayUI instance;
-    [SerializeField] Image win_panel;
+    [SerializeField] Image lose_panel;
     public static GamePlayUI Instance => instance;
     // Start is called before the first frame update
     void Start()
@@ -22,6 +22,6 @@ public class GamePlayUI : MonoBehaviour
 
     public void DisplayGameOver()
     {
-        win_panel.gameObject.SetActive(true);
+        lose_panel.gameObject.SetActive(true);
     }
 }
